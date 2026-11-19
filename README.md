@@ -1,6 +1,6 @@
 # Campus Library System - QA Project
 
-**Student:** Ahmad Kazmi | **Roll No.:** 24P-3011 | **Course:** Software Quality Engineering
+**Group members:** Ahmad Kazmi (24P-3011), Ahmad (24P-3040), Abdullah (24P-3067) | **Course:** Software Quality Engineering
 
 ## Description
 This repository holds the test work for the supplied Campus Library Book Reservation System, a Flask web app with login/logout, book search, availability and reservations (11-digit phone required; unavailable and duplicate reservations are rejected). The project contains black-box and white-box test designs, Selenium WebDriver UI automation (JavaScript, Chrome), a Postman/Newman API collection, JMeter performance tests, test-case/defect documentation and a final summary. The application source itself is provided by the instructor and is **not** included here.

@@ -1,6 +1,6 @@
 # Task 8 - Final Summary
 
-**Student:** Ahmad Kazmi | **Roll No.:** 24P-3011
+**Group members:** Ahmad Kazmi (24P-3011), Ahmad (24P-3040), Abdullah (24P-3067)
 **Application:** Campus Library (Flask), http://127.0.0.1:5000 | **Environment:** Windows 11 Pro, Chrome 157, Node 24.18, Java 1.8, JMeter 5.6.3
 
 ## Techniques applied
