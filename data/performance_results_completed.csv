@@ -1,0 +1,9 @@
+Experiment,Threads,Ramp-up (sec),Loops,Samplers,Planned Requests,Actual Samples,Avg (ms),Min (ms),Max (ms),P95 (ms),Throughput (req/s),Errors (%),Observations
+B1,5,10,5,1,25,25,4.28,2,42,4,3.19,0.0,"25/25 samples HTTP 200; throughput low because 5 threads start over a 10s ramp-up (idle time, not server limit)."
+E1,1,1,10,1,10,10,6.4,2,37,37,140.85,0.0,"One thread, 10 sequential requests finish in ~0.07s so throughput is high (140/s); max (37ms) is the first request (connection setup)."
+E2,5,5,10,1,50,50,4.48,2,33,6,12.58,0.0,"Avg ~4.5ms; throughput ~12.6/s is set by ramp-up pacing (about 1 new thread/s), not server capacity."
+E3,10,10,10,1,100,100,4.28,2,30,6,11.15,0.0,"Avg ~4.3ms, P95 6ms, no errors; throughput ~11/s again bounded by ramp-up arrival rate."
+E4,20,20,10,1,200,200,4.22,2,33,6,10.54,0.0,"Avg ~4.2ms, P95 6ms, no errors; throughput ~10.5/s; response time flat from 1 to 20 threads - server not saturated."
+C1,10,1,1,1,10,10,7.1,3,34,34,11.98,0.0,"10 threads x 1 loop: users start within 1s, each opens a new connection; avg 7.1ms, max 34ms (first requests/warm-up)."
+C2,1,1,10,1,10,10,7.2,4,30,30,121.95,0.0,"1 thread x 10 loops: sequential on one keep-alive connection; finishes in 0.08s; avg 7.2ms, max 30ms from first request."
+C3,1,1,1,10,10,10,8.4,5,34,34,113.64,0.0,"1 thread x 10 samplers: behaves like C2 (sequential); avg 8.4ms, max 34ms from first request."

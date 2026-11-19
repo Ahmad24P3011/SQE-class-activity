@@ -1,0 +1,8 @@
+Test ID,Description,Expected,Actual,Status
+"A1-01","Valid login","Login successful, on /books, user=student1","Login successful, /books, user=student1","PASS"
+"A1-02","Incorrect username","Invalid username or password, stays on /login","Invalid username or password, onLogin=true","PASS"
+"A1-03","Incorrect password","Invalid username or password","Invalid username or password","PASS"
+"A1-04","Blank username (HTML5 required blocks submit)","Form invalid, no submission","invalid=true, url=/login","PASS"
+"A1-05","Blank password (HTML5 required blocks submit)","Form invalid, no submission","invalid=true","PASS"
+"A1-06","Both fields blank","Form invalid","invalid=true","PASS"
+"A1-07","Logout, then protected page denied","Logged out successfully; /reserve/1 redirects to /login with ""Please log in first.""","Logged out successfully; navLogin=true; Please log in first. @ /login","PASS"

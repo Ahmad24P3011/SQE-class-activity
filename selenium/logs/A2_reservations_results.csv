@@ -1,0 +1,10 @@
+Test ID,Description,Expected,Actual,Status
+"A2-01","Search existing book ""Software Testing""","1 result: Software Testing","[""Software Testing""]","PASS"
+"A2-02","Search missing book ""nonsense-title-xyz""","0 cards, ""No matching books found""","0 cards, ""No matching books found""","PASS"
+"A2-03","Reserve available book 1 with valid phone","Reservation successful, copies 3->2, redirected to /books","Reservation successful, copies 3->2, /books","PASS"
+"A2-04","Reserve unavailable book 3 (0 copies)","""Book is unavailable"", no reservation form","""Book is unavailable"", forms=0","PASS"
+"A2-05a","Invalid phone (letters/short) blocked by browser validation","Form invalid, still on /reserve/2, copies=2","invalid=true, /reserve/2, copies=2","PASS"
+"A2-05b","Invalid phone rejected by SERVER (client validation bypassed)","""Phone number must contain exactly 11 digits"", copies unchanged=2","""Phone number must contain exactly 11 digits"", copies=2","PASS"
+"A2-05c","12-digit phone rejected by server","Phone validation error, copies=2","""Phone number must contain exactly 11 digits"", copies=2","PASS"
+"A2-06","Duplicate reservation of book 1 by same user","""You already reserved this book"", copies unchanged=2","""You already reserved this book"", copies=2","PASS"
+"A2-07","Different user (student2) can reserve same book 1","Reservation successful, copies 2->1","Reservation successful, copies 2->1","PASS"

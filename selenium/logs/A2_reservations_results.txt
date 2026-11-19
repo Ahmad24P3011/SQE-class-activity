@@ -1,0 +1,10 @@
+A2-01	PASS	Search existing book "Software Testing"	expected=1 result: Software Testing	actual=["Software Testing"]
+A2-02	PASS	Search missing book "nonsense-title-xyz"	expected=0 cards, "No matching books found"	actual=0 cards, "No matching books found"
+A2-03	PASS	Reserve available book 1 with valid phone	expected=Reservation successful, copies 3->2, redirected to /books	actual=Reservation successful, copies 3->2, /books
+A2-04	PASS	Reserve unavailable book 3 (0 copies)	expected="Book is unavailable", no reservation form	actual="Book is unavailable", forms=0
+A2-05a	PASS	Invalid phone (letters/short) blocked by browser validation	expected=Form invalid, still on /reserve/2, copies=2	actual=invalid=true, /reserve/2, copies=2
+A2-05b	PASS	Invalid phone rejected by SERVER (client validation bypassed)	expected="Phone number must contain exactly 11 digits", copies unchanged=2	actual="Phone number must contain exactly 11 digits", copies=2
+A2-05c	PASS	12-digit phone rejected by server	expected=Phone validation error, copies=2	actual="Phone number must contain exactly 11 digits", copies=2
+A2-06	PASS	Duplicate reservation of book 1 by same user	expected="You already reserved this book", copies unchanged=2	actual="You already reserved this book", copies=2
+A2-07	PASS	Different user (student2) can reserve same book 1	expected=Reservation successful, copies 2->1	actual=Reservation successful, copies 2->1
+SUMMARY: 9/9 PASS

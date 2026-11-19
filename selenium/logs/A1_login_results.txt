@@ -1,0 +1,8 @@
+A1-01	PASS	Valid login	expected=Login successful, on /books, user=student1	actual=Login successful, /books, user=student1
+A1-02	PASS	Incorrect username	expected=Invalid username or password, stays on /login	actual=Invalid username or password, onLogin=true
+A1-03	PASS	Incorrect password	expected=Invalid username or password	actual=Invalid username or password
+A1-04	PASS	Blank username (HTML5 required blocks submit)	expected=Form invalid, no submission	actual=invalid=true, url=/login
+A1-05	PASS	Blank password (HTML5 required blocks submit)	expected=Form invalid, no submission	actual=invalid=true
+A1-06	PASS	Both fields blank	expected=Form invalid	actual=invalid=true
+A1-07	PASS	Logout, then protected page denied	expected=Logged out successfully; /reserve/1 redirects to /login with "Please log in first."	actual=Logged out successfully; navLogin=true; Please log in first. @ /login
+SUMMARY: 7/7 PASS

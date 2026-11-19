@@ -1,0 +1,13 @@
+ID,Feature,Input,Expected Result,Actual Result,Status,Notes
+TC01,Login,valid credentials (student1),Login successful,"Login successful, /books, user=student1",PASS,Selenium A1-01; also data-driven TC01/TC06
+TC02,Login,wrong username,Invalid credentials (app message: Invalid username or password),"Invalid username or password, onLogin=true",PASS,Negative test - rejection matches requirement => PASS
+TC03,Login,wrong password,Invalid credentials (app message: Invalid username or password),Invalid username or password,PASS,Negative test => PASS
+TC04,Login,empty credentials,Required field validation,invalid=true,PASS,"Also A1-04 (blank user), A1-05 (blank password)"
+TC05,Logout,logout after login,Protected route inaccessible,Logged out successfully; navLogin=true; Please log in first. @ /login,PASS,Negative test: /reserve/1 redirects to /login
+TC06,Search,Software Testing,Matching results,"[""Software Testing""]",PASS,
+TC07,Search,nonsense-title-xyz,No matching books,"0 cards, ""No matching books found""",PASS,Negative test => PASS
+TC08,Reservation,available book 1 and valid phone 03123456789,Reservation successful,"Reservation successful, copies 3->2, /books",PASS,Copies 3 -> 2 verified via API
+TC09,Reservation,unavailable book 3 (0 copies),Reservation rejected,"""Book is unavailable"", forms=0",PASS,Negative test => PASS
+TC10,Reservation,invalid phone 12345,Validation error,"""Phone number must contain exactly 11 digits"", copies=2",PASS,Also A2-05a (browser pattern) and A2-05c (12 digits); copies unchanged
+TC11,Reservation,reserve same book twice,Duplicate rejected,"""You already reserved this book"", copies=2",PASS,Negative test => PASS; copies unchanged
+TC12,Search,SQL-injection style text: ' OR 1=1 --,"Treated as a literal string; 0 results, no error","0 books returned (""0 matching books""), message ""No matching books found"", no error page",PASS,Negative / error-guessing test; verified in Chrome UI (parameterised query)

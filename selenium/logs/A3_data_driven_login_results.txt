@@ -1,0 +1,9 @@
+TC01	PASS	user="student1" pass="***********"	expected=Login successful	actual=Login successful
+TC02	PASS	user="wronguser" pass="***********"	expected=Invalid username or password	actual=Invalid username or password
+TC03	PASS	user="student1" pass="*********"	expected=Invalid username or password	actual=Invalid username or password
+TC04	PASS	user="" pass="***********"	expected=required	actual=required
+TC05	PASS	user="student1" pass=""	expected=required	actual=required
+TC06	PASS	user="student2" pass="***********"	expected=Login successful	actual=Login successful
+TC07	PASS	user="STUDENT1" pass="***********"	expected=Invalid username or password	actual=Invalid username or password
+TC08	PASS	user="student1" pass="***********"	expected=Invalid username or password	actual=Invalid username or password
+SUMMARY: 8/8 PASS

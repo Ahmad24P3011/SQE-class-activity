@@ -1,0 +1,1 @@
+{"name":"library-ui-testing-lab","version":"1.0.0","private":true,"scripts":{"test":"node login_data_test.js","smoke":"node smoke.js"},"dependencies":{"selenium-webdriver":"^4.20.0"}}

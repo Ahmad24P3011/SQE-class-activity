@@ -1,0 +1,9 @@
+Test ID,Description,Expected,Actual,Status
+"TC01","user=""student1"" pass=""***********""","Login successful","Login successful","PASS"
+"TC02","user=""wronguser"" pass=""***********""","Invalid username or password","Invalid username or password","PASS"
+"TC03","user=""student1"" pass=""*********""","Invalid username or password","Invalid username or password","PASS"
+"TC04","user="""" pass=""***********""","required","required","PASS"
+"TC05","user=""student1"" pass=""""","required","required","PASS"
+"TC06","user=""student2"" pass=""***********""","Login successful","Login successful","PASS"
+"TC07","user=""STUDENT1"" pass=""***********""","Invalid username or password","Invalid username or password","PASS"
+"TC08","user=""student1"" pass=""***********""","Invalid username or password","Invalid username or password","PASS"
