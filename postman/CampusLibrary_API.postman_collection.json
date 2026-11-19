@@ -1,0 +1,244 @@
+{
+  "info": {
+    "name": "Campus Library API",
+    "_postman_id": "24p3011-campus-library-api",
+    "description": "API tests for the Campus Library Flask app (Ahmad Kazmi, 24P-3011). The app supports GET and POST only - no PUT/PATCH/DELETE routes exist. All requests are repeatable (no state is changed).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET /api/books - list all books",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Response is a non-empty array\", function () { const j = pm.response.json(); pm.expect(j).to.be.an(\"array\"); pm.expect(j.length).to.be.at.least(1); });",
+              "pm.test(\"Each book has id, title, author, copies\", function () { pm.response.json().forEach(function (b) { pm.expect(b).to.have.all.keys(\"id\", \"title\", \"author\", \"copies\"); }); });",
+              "pm.test(\"Response time under 500 ms\", function () { pm.expect(pm.response.responseTime).to.be.below(500); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books"
+          ]
+        },
+        "description": "Positive test: returns the full catalogue as a JSON array."
+      }
+    },
+    {
+      "name": "GET /api/books/1 - single book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Book has id, title and copies\", function () { const b = pm.response.json(); pm.expect(b).to.have.property(\"id\", 1); pm.expect(b).to.have.property(\"title\"); pm.expect(b).to.have.property(\"copies\"); });",
+              "pm.test(\"copies is a non-negative number\", function () { pm.expect(pm.response.json().copies).to.be.a(\"number\").and.at.least(0); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "1"
+          ]
+        },
+        "description": "Positive test: an existing book id returns its details."
+      }
+    },
+    {
+      "name": "GET /api/books/99999 - missing book (negative)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
+              "pm.test(\"Error message is Book not found\", function () { pm.expect(pm.response.json()).to.have.property(\"error\", \"Book not found\"); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books/99999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "99999"
+          ]
+        },
+        "description": "Negative test: a non-existent id must be rejected with 404 and an error message."
+      }
+    },
+    {
+      "name": "GET /api/books/search?q=Software - search",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Result is an array containing Software Testing\", function () { const j = pm.response.json(); pm.expect(j).to.be.an(\"array\"); pm.expect(j.map(function (b) { return b.title; })).to.include(\"Software Testing\"); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books/search?q=Software",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "q",
+              "value": "Software"
+            }
+          ]
+        },
+        "description": "Positive test: search by title returns matching books."
+      }
+    },
+    {
+      "name": "POST /api/reservations - invalid phone (negative)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 400\", function () { pm.response.to.have.status(400); });",
+              "pm.test(\"Error message is Invalid phone number\", function () { pm.expect(pm.response.json()).to.have.property(\"error\", \"Invalid phone number\"); });",
+              "pm.test(\"Content-Type is JSON\", function () { pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/reservations",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "reservations"
+          ]
+        },
+        "description": "Negative test: valid credentials but a 10-digit phone must be rejected. Nothing is reserved, so the request is repeatable.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"student1\",\n  \"password\": \"Library@123\",\n  \"book_id\": 2,\n  \"phone\": \"123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /login - valid credentials",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 302 (redirect after login)\", function () { pm.response.to.have.status(302); });",
+              "pm.test(\"Redirects to /books\", function () { pm.expect(pm.response.headers.get(\"Location\")).to.eql(\"/books\"); });",
+              "pm.test(\"Session cookie is set\", function () { pm.expect(pm.cookies.has(\"session\")).to.be.true; });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "login"
+          ]
+        },
+        "description": "Positive test: the HTML login form accepts valid credentials and redirects to the catalogue. Redirects are disabled so the 302 can be asserted.",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "username",
+              "value": "student1"
+            },
+            {
+              "key": "password",
+              "value": "Library@123"
+            }
+          ]
+        }
+      },
+      "protocolProfileBehavior": {
+        "followRedirects": false
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:5000"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+﻿newman
+
+Campus Library API
+
+Root GET /api/books - list all books
+  GET http://127.0.0.1:5000/api/books [200 OK, 622B, 21ms]
+  Pass  Status code is 200
+  Pass  Response is a non-empty array
+  Pass  Each book has id, title, author, copies
+  Pass  Response time under 500 ms
+
+Root GET /api/books/1 - single book
+  GET http://127.0.0.1:5000/api/books/1 [200 OK, 241B, 5ms]
+  Pass  Status code is 200
+  Pass  Book has id, title and copies
+  Pass  copies is a non-negative number
+
+Root GET /api/books/99999 - missing book (negative)
+  GET http://127.0.0.1:5000/api/books/99999 [404 NOT FOUND, 199B, 4ms]
+  Pass  Status code is 404
+  Pass  Error message is Book not found
+
+Root GET /api/books/search?q=Software - search
+  GET http://127.0.0.1:5000/api/books/search?q=Software [200 OK, 243B, 4ms]
+  Pass  Status code is 200
+  Pass  Result is an array containing Software Testing
+
+Root POST /api/reservations - invalid phone (negative)
+  POST http://127.0.0.1:5000/api/reservations [400 BAD REQUEST, 207B, 90ms]
+  Pass  Status code is 400
+  Pass  Error message is Invalid phone number
+  Pass  Content-Type is JSON
+
+Root POST /login - valid credentials
+  POST http://127.0.0.1:5000/login [302 FOUND, 577B, 95ms]
+  Pass  Status code is 302 (redirect after login)
+  Pass  Redirects to /books
+  Pass  Session cookie is set
+
+-----------------------------------------------------------------
+|                         |         executed |           failed |
+--------------------------+------------------+-------------------
+|              iterations |                1 |                0 |
+--------------------------+------------------+-------------------
+|                requests |                6 |                0 |
+--------------------------+------------------+-------------------
+|            test-scripts |                6 |                0 |
+--------------------------+------------------+-------------------
+|      prerequest-scripts |                0 |                0 |
+--------------------------+------------------+-------------------
+|              assertions |               17 |                0 |
+-----------------------------------------------------------------
+| total run duration: 589ms                                     |
+-----------------------------------------------------------------
+| total data received: 869B (approx)                            |
+-----------------------------------------------------------------
+| average response time: 36ms [min: 4ms, max: 95ms, s.d.: 40ms] |
+-----------------------------------------------------------------
