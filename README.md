@@ -70,7 +70,7 @@ JMeter plans and result files: B1 `GET_Books_Load_Test.jmx` -> `B1_basic_load.jt
     |-- QA_Test_Report.pdf               (Selenium + JMeter report)
     |-- Task1_BlackBox_Testing.pdf
     |-- Task2_WhiteBox_Testing.pdf
-    |-- Task3_Defect_Report.md
+    |-- Task3_Defect_Report.pdf
     `-- Task8_Final_Summary.pdf
 ```
 
@@ -81,4 +81,4 @@ JMeter plans and result files: B1 `GET_Books_Load_Test.jmx` -> `B1_basic_load.jt
 | Test cases | **12/12 PASS** (TC01-TC12) |
 | Postman / Newman | 6/6 requests, 17/17 assertions PASS |
 | JMeter | 8 performance experiments (B1, E1-E4, C1-C3), **0 errors**; B4 status-code assertions 2/2 PASS |
-| Defects | No application defects; 1 test-environment issue (Chrome password-leak popup), see `report/Task3_Defect_Report.md` |
+| Defects | No application defects; 1 test-environment issue (Chrome password-leak popup), see `report/Task3_Defect_Report.pdf` |
