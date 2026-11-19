@@ -1,4 +1,4 @@
-# Campus Library System - QA Project
+﻿# Campus Library System - QA Project
 
 **Group members:** Ahmad Kazmi (24P-3011), Ahmad (24P-3040), Abdullah (24P-3067) | **Course:** Software Quality Engineering
 
@@ -71,7 +71,7 @@ JMeter plans and result files: B1 `GET_Books_Load_Test.jmx` -> `B1_basic_load.jt
     |-- Task1_BlackBox_Testing.pdf
     |-- Task2_WhiteBox_Testing.pdf
     |-- Task3_Defect_Report.md
-    `-- Task8_Final_Summary.md
+    `-- Task8_Final_Summary.pdf
 ```
 
 ## Test results summary
